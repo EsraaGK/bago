@@ -16,7 +16,7 @@
                 android:id="@+id/myOrdersRecyclerview"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:padding="6dp"
+                android:padding="8dp"
                 android:clipToPadding="false"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"

@@ -9,14 +9,19 @@ import android.widget.Toast
 import android.graphics.Typeface
 import android.support.v4.content.ContextCompat
 import android.os.Build
+import android.preference.PreferenceManager
 import com.codemybrainsout.onboarder.AhoyOnboarderCard
 import com.iti.bago.tabbarActivity.TabbarActivity
 
 
 class OnBoardingActivityView : AhoyOnboarderActivity() {
+
+    companion object {
+        var COMPLETED_ONBOARDING_PREF_NAME: String = "on_boarding_complete"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-   //     setContentView(R.layout.activity_on_boarding_view)
 
         val ahoyOnboarderCard1 =
             AhoyOnboarderCard(
@@ -47,12 +52,12 @@ class OnBoardingActivityView : AhoyOnboarderActivity() {
         for (page in pages) {
             page.setTitleColor(R.color.headerscolor)
             page.setDescriptionColor(R.color.secondry)
-            page.setTitleTextSize(dpToPixels(10, this));
-            page.setDescriptionTextSize(dpToPixels(6, this));
+            page.setTitleTextSize(dpToPixels(10, this))
+            page.setDescriptionTextSize(dpToPixels(6, this))
             //page.setIconLayoutParams(width, height, marginTop, marginLeft, marginRight, marginBottom);
         }
 
-        setFinishButtonTitle("Finish")
+        setFinishButtonTitle("Done")
         showNavigationControls(true)
         setGradientBackground()
 
@@ -68,7 +73,20 @@ class OnBoardingActivityView : AhoyOnboarderActivity() {
     }
 
     override fun onFinishButtonPressed() {
+
+        PreferenceManager.getDefaultSharedPreferences(applicationContext).edit().apply {
+            putBoolean(COMPLETED_ONBOARDING_PREF_NAME, true)
+            apply()
+        }
+
         startActivity(Intent(this, TabbarActivity::class.java))
         finish()
+    }
+
+    override fun onBackPressed() {
+        var startMain = Intent(Intent.ACTION_MAIN)
+        startMain.addCategory(Intent.CATEGORY_HOME)
+        startMain.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(startMain)
     }
 }

@@ -3,9 +3,11 @@ package com.iti.bago.signup_login
 import android.app.Application
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -13,6 +15,9 @@ import androidx.navigation.findNavController
 import com.iti.bago.R
 import com.iti.bago.SharedPrefUtil
 import com.iti.bago.databinding.ActivityLoginBinding
+import com.iti.bago.signup_login.onboarding.OnBoardingActivityView
+import com.iti.bago.signup_login.onboarding.OnBoardingActivityView.Companion.COMPLETED_ONBOARDING_PREF_NAME
+import com.iti.bago.tabbarActivity.settings.SettingsFragment.Companion.LOGGED_OUT
 import android.arch.lifecycle.ViewModelProvider as LifecycleViewModelProvider
 
 
@@ -50,28 +55,13 @@ class LogInActivity : AppCompatActivity() {
         // necessary for DataBinding
         binding.setLifecycleOwner(this)
         binding.loginActivityVM = logInActivity_ViewModel
-
-       //shared preferences
-        val sharedPrefUtil = SharedPrefUtil()
-        val chooseNavigation = sharedPrefUtil.getNewUserFlag(this)
-
-//        Log.i("shrd",chooseNavigation)
-
-        if (chooseNavigation == "true") {
-            Log.i("shrd","true")
-            navController.navigate(R.id.action_signUpFragment_to_onBoardingActivity)
-        }
-        if (chooseNavigation == "false") {
-            Log.i("shrd","false")
-            navController.navigate(R.id.action_signUpFragment_to_tabbarActivity)
-        }
     }
 
 
     override fun onBackPressed() {
         super.onBackPressed()
-         finishAffinity()
-       // finish();
+        finishAffinity()
+        // finish();
     }
 
 }

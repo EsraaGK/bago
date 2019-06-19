@@ -12,13 +12,13 @@ import android.media.RingtoneManager
 import android.os.Build
 import android.os.Vibrator
 import android.support.v4.app.NotificationCompat
-import android.support.v4.content.ContextCompat
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.iti.bago.tabbarActivity.TabbarActivity
-import com.iti.bago.tabbarActivity.home.store.HomeFragment
-import java.util.*
+import com.iti.bago.tabbarActivity.profile.orders.DetailsResponseObj
+import com.iti.bago.tabbarActivity.profile.orders.OrderDetailsFragment
+import com.iti.bago.tabbarActivity.profile.orders.ProductItem
 
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
@@ -33,58 +33,37 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         super.onMessageReceived(remoteMessage)
 
-      //  sendNotification(remoteMessage!!)
 
-        notify(remoteMessage)
+        val json :String
+        var responseJson : String
+        var body:String
 
+        if (remoteMessage!!.data["body"] != null) {
+
+            Log.i("PVL", "RECEIVED MESSAGE: " + remoteMessage.data["body"] )
+
+            json = remoteMessage.data["body"]  as String
+            body = json.split("$")[0]
+            responseJson = json.split("$")[1]
+            Log.i("PVL", responseJson)
+            notify(remoteMessage,responseJson,body)
+        } else {
+            Log.i("PVL", "RECEIVED MESSAGE: failed" )
+        }
     }
 
-
-    private fun sendNotification(remoteMessage: RemoteMessage) {
-
-        val intent = Intent(this, TabbarActivity::class.java)
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-
-        val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-            PendingIntent.FLAG_ONE_SHOT)
-
-        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val notificationBuilder = NotificationCompat.Builder(this)
-            .setContentTitle(remoteMessage.notification!!.title)
-            .setContentText(remoteMessage.notification!!.body)
-            .setAutoCancel(true)
-            .setSmallIcon(R.mipmap.app_btn)
-            .setSound(defaultSoundUri)
-            .setContentIntent(pendingIntent)
-
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build())
-
-    }
-
-    private fun notify(remoteMessage: RemoteMessage?) {
-
-//        val fcmToken: FCMResponse = FCMResponse(
-//            remoteMessage!!.data["id"] as String,
-//            remoteMessage.data["tans_Id"] as String,
-//            remoteMessage.data["image"] as String,
-//            remoteMessage.data["long"] as String,
-//            remoteMessage.data["lat"] as String,
-//            remoteMessage.data["name"] as String
-//        )
+    private fun notify(remoteMessage: RemoteMessage?,responseJson:String,body:String) {
 
         val mNotifyManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val intent = Intent(this, TabbarActivity::class.java)
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-     //   intent.putExtra("Notification", "patient")
+        intent.putExtra("details_object", responseJson)
 
         val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT)
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         vibrator.vibrate(1000)
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             createChannel(mNotifyManager)
@@ -92,10 +71,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val mBuilder = NotificationCompat.Builder(this, "id")
             .setTicker("Bago Notification")
-            .setContentTitle("Order Tracking")
-            .setContentText(remoteMessage!!.notification!!.body)
+            .setContentTitle(remoteMessage!!.data["title"])
+            .setContentText(body)
             .setSmallIcon(R.mipmap.app_btn)
-            //.setColor(ContextCompat.getColor(this, android.R.color.holo_red_light))
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
@@ -116,4 +94,3 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         notificationManager.createNotificationChannel(mChannel)
     }
 }
-

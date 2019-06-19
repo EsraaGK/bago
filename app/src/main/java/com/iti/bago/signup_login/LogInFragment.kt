@@ -6,7 +6,9 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +17,13 @@ import androidx.navigation.fragment.findNavController
 import com.iti.bago.R
 import com.iti.bago.databinding.FragmentLogInBinding
 import com.iti.bago.signup_login.onboarding.OnBoardingActivity
+import com.iti.bago.signup_login.onboarding.OnBoardingActivityView
 
 
 class LogInFragment : Fragment() {
 
     lateinit var binding: FragmentLogInBinding
-    lateinit var logInFragment_ViewModel_Factory : LogInFragment_ViewModel_Factory
+    lateinit var logInFragment_ViewModel_Factory: LogInFragment_ViewModel_Factory
     lateinit var logInFragment_ViewModel: LogInFragment_ViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,9 +38,10 @@ class LogInFragment : Fragment() {
         logInFragment_ViewModel_Factory =
             LogInFragment_ViewModel_Factory(navController)
 
-        logInFragment_ViewModel = ViewModelProviders.of(this,logInFragment_ViewModel_Factory ).get(
-            LogInFragment_ViewModel::class.java)
-        binding.setLifecycleOwner (this)
+        logInFragment_ViewModel = ViewModelProviders.of(this, logInFragment_ViewModel_Factory).get(
+            LogInFragment_ViewModel::class.java
+        )
+        binding.setLifecycleOwner(this)
         binding.loginFragVM = logInFragment_ViewModel
 
 //        logInFragment_ViewModel.loginFlag!!.observe(this, Observer {
@@ -45,11 +49,6 @@ class LogInFragment : Fragment() {
 //            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 //            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
 //            context!!.startActivity(intent)
-//        })
-
-//        logInFragment_ViewModel.loginFlag!!.observe(this, Observer {
-//            activity!!.startActivity(Intent(activity!!,OnBoardingActivity::class.java))
-//            activity!!.finish()
 //        })
 
         return binding.root

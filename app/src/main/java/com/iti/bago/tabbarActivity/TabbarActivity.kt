@@ -17,34 +17,58 @@ import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
+import com.google.gson.Gson
 import com.iti.bago.R
 import com.iti.bago.SharedPrefUtil
 import com.iti.bago.databinding.ActivityTabbarBinding
+import com.iti.bago.tabbarActivity.profile.orders.*
+import kotlinx.android.synthetic.main.activity_tabbar.*
 import kotlinx.android.synthetic.main.home_fragment.*
 
 
 class TabbarActivity : AppCompatActivity() {
-  lateinit var  toolbar: ActionBar
+    lateinit var toolbar: ActionBar
 
     lateinit var bottomNavigation: BottomNavigationView
     lateinit var navController: NavController
+    companion object{
+        var detailsJson: String? = null
+    }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (intent != null) {
+            detailsJson = intent.getStringExtra("patient_id")
+            if (detailsJson != null) {
+                Log.i("Tabbar", detailsJson)
+                Gson().fromJson<OrderResponseObj>(detailsJson, DetailsResponseObj::class.java)
+
+                navController = Navigation.findNavController(this, R.id.tabBarHostFragment)
+
+                val navHostFragment = tabBarHostFragment as NavHostFragment
+                val inflater = navHostFragment.navController.navInflater
+                val graph = inflater.inflate(R.navigation.navigation)
+                graph.startDestination = R.id.orderDetailsFragment
+                val args = Bundle()
+                args.putString("details_object", intent.getStringExtra("details_object"))
+                navHostFragment.navController.setGraph(graph, args)
+            }
+        }
 
         val binding = DataBindingUtil.setContentView<ActivityTabbarBinding>(
             this, R.layout.activity_tabbar
         )
 
         navController = Navigation.findNavController(this, R.id.tabBarHostFragment)
-// var  toolbar: ActionBar =supportActionBar!!
+        // var  toolbar: ActionBar =supportActionBar!!
         toolbar = supportActionBar!!
         // toolbar.title = "Home"
         bottomNavigation = binding.navigationView
@@ -93,15 +117,16 @@ class TabbarActivity : AppCompatActivity() {
             startMain.addCategory(Intent.CATEGORY_HOME)
             startMain.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(startMain)
-        }else {
+        } else {
 
             super.onBackPressed()
         }
     }
 
-public fun setFragTitle(title: String){
-    supportActionBar!!.setTitle(title)
-}
+    fun setFragTitle(title: String) {
+        supportActionBar!!.title = title
+    }
+
     private fun setupNavigation() {
         //    var navController = Navigation.findNavController(this, R.customer_id.tabBarHostFragment)
 //        setupActionBarWithNavController(this, navController)
