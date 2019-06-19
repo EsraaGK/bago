@@ -13,9 +13,11 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:background="@drawable/layout_bgw"
+            android:elevation="8dp"
             android:layout_margin="8dp"
-            >
+    >
 
 
         <ImageView
@@ -42,6 +44,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:src="@mipmap/heart"
                 android:background="@null"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="4dp"
                 android:onClick="@{(v)->viewModel.addtoFavourites(v,product_obj )}"/>
 
 
@@ -92,7 +96,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:src="@mipmap/shoppingcartp"
-                android:background="@color/white"
+                android:layout_marginRight="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@null"
 
                 android:onClick="@{(v)->viewModel.addtoCard(v,product_obj )}"/>
 

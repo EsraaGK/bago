@@ -64,23 +64,23 @@
                         android:id="@+id/login_button"
                         android:onClick="@{(v)-> loginActivity_VM.movetoLogin(v)}"
                         android:layout_weight="1"/>
-                <ImageButton
+                <!--<ImageButton-->
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/google_button"
-                        android:layout_weight="1"
-                        android:src="@mipmap/google"
-                        android:background="@null"
-                        android:layout_gravity="center"/>
-                <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/facebook_button"
-                        android:layout_weight="1"
-                        android:src="@mipmap/facebook"
-                        android:background="@null"
-                        android:layout_gravity="center"/>
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:id="@+id/google_button"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:src="@mipmap/google"-->
+                        <!--android:background="@null"-->
+                        <!--android:layout_gravity="center"/>-->
+                <!--<ImageButton-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:id="@+id/facebook_button"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:src="@mipmap/facebook"-->
+                        <!--android:background="@null"-->
+                        <!--android:layout_gravity="center"/>-->
             </LinearLayout>
             <fragment
                     android:id="@+id/myNavHostFragment"

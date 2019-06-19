@@ -51,20 +51,20 @@ class LogInActivity : AppCompatActivity() {
         binding.setLifecycleOwner(this)
         binding.loginActivityVM = logInActivity_ViewModel
 
-       //shared preferences
-        val sharedPrefUtil = SharedPrefUtil()
-        val chooseNavigation = sharedPrefUtil.getNewUserFlag(this)
-
-//        Log.i("shrd",chooseNavigation)
-
-        if (chooseNavigation == "true") {
-            Log.i("shrd","true")
-            navController.navigate(R.id.action_signUpFragment_to_onBoardingActivity)
-        }
-        if (chooseNavigation == "false") {
-            Log.i("shrd","false")
-            navController.navigate(R.id.action_signUpFragment_to_tabbarActivity)
-        }
+//       //shared preferences
+//        val sharedPrefUtil = SharedPrefUtil()
+//        val chooseNavigation = sharedPrefUtil.getNewUserFlag(this)
+//
+////        Log.i("shrd",chooseNavigation)
+//
+//        if (chooseNavigation == "true") {
+//            Log.i("shrd","true")
+//            navController.navigate(R.id.action_signUpFragment_to_onBoardingActivity)
+//        }
+//        if (chooseNavigation == "false") {
+//            Log.i("shrd","false")
+//            navController.navigate(R.id.action_signUpFragment_to_tabbarActivity)
+//        }
     }
 
 

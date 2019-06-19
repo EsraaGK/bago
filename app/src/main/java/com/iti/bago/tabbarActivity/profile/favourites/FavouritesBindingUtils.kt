@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -169,27 +170,17 @@ fun bindtxtStatus(txt:TextView ,status: LoadingStatus?) {
     }
 }
 
-//
-//@BindingAdapter("price_weight")
-//fun TextView.setPriceXWeight(item: String?) {
-//    item?.let {
-//        text = item
-//    }
-//}
+@BindingAdapter("cart_flag")
+fun setFav(imageButton: ImageButton, flag: Boolean?) {
 
 
-//@BindingAdapter("units_no")
-//fun TextView.setUnitsno(item: Int?) {
-//    item?.let {
-//        text = item.toString()
-//    }
-//}
-//
+    when (flag) {
+        false -> {
+            imageButton.setImageResource(R.mipmap.shoppingcartp)
+        }
+        true -> {
+            imageButton.setImageResource(R.mipmap.shoppingcart)
+        }
 
-//
-//@BindingAdapter("item_total_price")
-//fun TextView.setFinalPrice(item: Double?) {
-//    item?.let {
-//        text = item.toString()
-//    }
-//}
+    }
+}

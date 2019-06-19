@@ -9,6 +9,7 @@ data class FavouritesObj(
     val product_id: String,
     val name: String,
     val type: String,
+    val cart:Boolean?,
     var position: Int?,
     val price_before: Double,
     val price_after: Double,

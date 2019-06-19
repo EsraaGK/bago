@@ -47,7 +47,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:textColor="#707070"
+                android:textColorHint="#B7B7B7"
+                android:textColor="#696969"
                 android:layout_marginStart="10dp"
         />
         <EditText
@@ -62,7 +63,8 @@
                 app:layout_constraintBottom_toTopOf="@id/password_txtview"
                 android:layout_marginStart="10dp"
                 android:textSize="20sp"
-                android:textColor="#B7B7B7"
+                android:textColorHint="#B7B7B7"
+                android:textColor="#696969"
 
                 android:drawableRight="@mipmap/email"
         />
@@ -92,7 +94,7 @@
                 android:textColor="#B7B7B7"
 
                 android:layout_marginStart="10dp"
-        android:drawableRight="@mipmap/password"/>
+                android:drawableRight="@mipmap/password"/>
 
         <Button
                 android:text="LOG IN"

@@ -10,6 +10,7 @@
                 name="viewModel"
                 type="com.iti.bago.tabbarActivity.profile.orders.OrderDetailsViewModel"/>
     </data>
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -35,70 +36,106 @@
                 android:gravity="center"
                 android:text="Order Details"
                 android:textColor="#555"
-                app:layout_constraintBottom_toTopOf="@id/view1"
+                app:layout_constraintBottom_toTopOf="@id/status_lable"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/map"/>
+        <TextView
+                tools:text="delivered order"
+                android:id="@+id/status_lable"
+                style="@style/header_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:gravity="center"
+                android:text="@{orderDetails.status+`Order`}"
+                android:textColor="@color/pink"
+                app:layout_constraintBottom_toTopOf="@id/view1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_lable"/>
 
         <View
                 android:id="@+id/view1"
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
-                android:background="#888"
+                android:background="@color/secondry"
                 app:layout_constraintBottom_toTopOf="@id/order_no_lable"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/order_lable"/>
+                app:layout_constraintTop_toBottomOf="@id/order_lable"
+        android:layout_marginHorizontal="12dp"/>
+
+        <TextView
+                android:id="@+id/call_lable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/view1"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/call"
+                android:text="Call Driver"
+                style="@style/header_style"
+                android:textColor="#555"/>
 
         <LinearLayout
                 android:id="@+id/call"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/view1"
-                app:layout_constraintBottom_toTopOf="@id/order_no_lable">
+                app:layout_constraintTop_toBottomOf="@id/call_lable"
+                app:layout_constraintBottom_toTopOf="@id/payment_lable"
+                app:layout_constraintRight_toRightOf="parent"
+        >
 
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/phone"/>
+                    app:srcCompat="@drawable/phone"
+                    android:layout_marginRight="8dp"
+            />
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-            tools:text="01020231020"/>
+                    android:text="@{orderDetails.delivery_phone}"
+                    tools:text="01020231020"/>
         </LinearLayout>
         <TextView
                 android:layout_marginLeft="8dp"
                 android:id="@+id/order_no_lable"
                 style="@style/header_style"
-                android:layout_width="match_parent"
+                android:textColor="#555"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Order Number"
-                android:textColor="#555"
+
+
                 app:layout_constraintBottom_toTopOf="@id/order_no_txt"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/call"/>
+                app:layout_constraintTop_toBottomOf="@id/view1"/>
 
         <TextView
                 android:layout_marginLeft="8dp"
 
                 android:id="@+id/order_no_txt"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{orderDetails.order_id}"
+
                 app:layout_constraintBottom_toTopOf="@id/payment_lable"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/order_no_lable"/>
+                app:layout_constraintTop_toBottomOf="@id/order_no_lable"
+                tools:text="sdfsdf"/>
 
         <TextView
                 android:id="@+id/payment_lable"
                 android:layout_marginLeft="8dp"
 
                 style="@style/header_style"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Payment"
                 android:textColor="#555"
+
                 app:layout_constraintBottom_toTopOf="@id/payment_txt"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/order_no_txt"/>
@@ -106,12 +143,13 @@
         <TextView
                 android:layout_marginLeft="8dp"
                 android:id="@+id/payment_txt"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{orderDetails.total_price}"
                 app:layout_constraintBottom_toTopOf="@id/dist_address_lable"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/payment_lable"/>
+                app:layout_constraintTop_toBottomOf="@id/payment_lable"
+                tools:text="fdfsdf"/>
 
         <TextView
                 android:id="@+id/dist_address_lable"
@@ -181,5 +219,6 @@
                 app:layout_constraintTop_toBottomOf="@id/products"
                 app:listData="@{orderDetails.products}"/>
     </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 </layout>
 

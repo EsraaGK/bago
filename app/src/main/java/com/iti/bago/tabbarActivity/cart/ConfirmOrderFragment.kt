@@ -36,7 +36,7 @@ class ConfirmOrderFragment : Fragment() {
         val viewModelFactory = ConfirmOrder_VMFactory(x)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ConfirmorderViewModel::class.java)
         Log.i("arrayfrom confirm frag", x[0].name)
-        //  viewModel.args = args
+          viewModel.args = ConfirmOrderFragmentArgs.fromBundle(arguments!!)
         binding.setLifecycleOwner(this)
         binding.viewModel = viewModel
         val sharedPrefUtil = SharedPrefUtil()

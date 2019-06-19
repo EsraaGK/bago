@@ -44,8 +44,9 @@ class ConfirmorderViewModel(val tempArray: Array<CartObj>) : ViewModel() {
     var phone: String = ""
     var mySupermarketsId = messyList.distinctBy { it.supermarket_id }
     val supermarkets_no = mySupermarketsId.size
-    val total_orders_coast = 15 * supermarkets_no
 
+var args :ConfirmOrderFragmentArgs?= null
+   // val total_orders_coast = (args!!.totalPrice) *15
     fun setId_Token(id: String, token: String) {
         customer_id = id
         customer_token = token
@@ -183,7 +184,7 @@ fun showDialog(view: View) {
 
     //set text from EditTexts of custom layout
     mDialogView.supermarket_text.text = "You Will Order From $supermarkets_no " +
-            "Supermarkets with total price of $total_orders_coast ,Order?"
+            "Supermarkets with total price of {${args!!.totalPrice +(supermarkets_no* 15)}} ,Order?"
 
     //ok button click of custom layout
     mDialogView.dialogOkBtn.setOnClickListener {

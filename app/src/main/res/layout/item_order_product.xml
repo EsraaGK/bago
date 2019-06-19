@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
     <data>
-<variable
-        name="productItem"
-        type="com.iti.bago.tabbarActivity.profile.orders.ProductItem"/>
+        <variable
+                name="productItem"
+                type="com.iti.bago.tabbarActivity.profile.orders.ProductItem"/>
     </data>
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_bgw"
+            android:elevation="8dp"
+            android:padding="8dp">
         <TextView
+                tools:text="csvdf"
                 android:id="@+id/num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -19,6 +24,7 @@
                 android:text="@{productItem.units_no}"
         />
         <TextView
+                tools:text="csvdf"
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -28,6 +34,7 @@
                 app:layout_constraintRight_toLeftOf="@id/price"
                 android:text="@{productItem.product_name}"/>
         <TextView
+                tools:text="csvdf"
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

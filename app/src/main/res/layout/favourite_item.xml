@@ -10,9 +10,10 @@
 
         <variable
                 name="viewModel"
-                  type="com.iti.bago.tabbarActivity.profile.favourites.FavouritesViewModel"/>
+                type="com.iti.bago.tabbarActivity.profile.favourites.FavouritesViewModel"/>
     </data>
     <android.support.constraint.ConstraintLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/layout_bgw"
@@ -39,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="@id/product_image"
                 tools:text="product_name"
                 android:textSize="20sp"
-               android:textStyle="bold"
+                android:textStyle="bold"
                 android:textColor="#707070"
                 app:product_name="@{favourites_obj.name}"
 
@@ -64,14 +65,13 @@
                 tools:text="product_weight"
                 app:unit_weight="@{favourites_obj.type}"
         />
-        <Button
+        <ImageButton
                 android:id="@+id/addto_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:text="ADD TO CART"
-                android:textColor="#EA4C89"
+                app:layout_constraintBottom_toBottomOf="@id/product_image"
+                app:cart_flag="@{favourites_obj.cart}"
                 android:background="@drawable/boarder_line"
                 android:padding="4dp"
                 android:onClick="@{(v)->viewModel.addtoCard(v,favourites_obj)}"
