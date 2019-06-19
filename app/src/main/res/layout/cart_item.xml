@@ -100,7 +100,8 @@
                     app:layout_constraintBottom_toTopOf="@id/total_price"
                     app:layout_constraintRight_toRightOf="parent"
 
-                    android:background="@null" android:layout_marginBottom="20dp" android:layout_marginRight="16dp"
+                    android:background="@null" android:layout_marginBottom="20dp"
+                    android:layout_marginRight="16dp"
                     android:onClick="@{(v)->viewModel.addtoFavourites(v,cart_obj )}"
                     app:favourite_flag="@{cart_obj.favourite}"/>
             <!--android:src="@mipmap/heart"-->

@@ -46,6 +46,7 @@ class CartFragment : Fragment() {
         cartFragmentViewModel.position.observe(this, Observer {
             (binding.cartRecyclerview.adapter)?.notifyItemChanged(it!!)
             binding.total=cartFragmentViewModel.total_coast.value
+
             Log.i("observer",binding.total.toString() )
             binding.itemsPrice.text = cartFragmentViewModel.total_coast.value.toString()
         })
