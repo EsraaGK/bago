@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "107143211379",
+    "firebase_url": "https://bago-ibtikar2019.firebaseio.com",
+    "project_id": "bago-ibtikar2019",
+    "storage_bucket": "bago-ibtikar2019.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107143211379:android:4dda2a5e7642e807",
+        "android_client_info": {
+          "package_name": "com.iti.bago"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107143211379-qfumiqpnj7appr06lc1ggvfodob3ctg8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iti.bago",
+            "certificate_hash": "8ff6970eb629db296d1b0418d6e49fa3b2eb39d9"
+          }
+        },
+        {
+          "client_id": "107143211379-jqok0us5n9m3nj6lnano76a5uq3qq01f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD6VHVn_MiWgSSqNLN0KZnp8Gc5QMT1MM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107143211379-jqok0us5n9m3nj6lnano76a5uq3qq01f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

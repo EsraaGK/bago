@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+                name="cart_obj"
+                type="com.iti.bago.tabbarActivity.cart.CartObj"/>
+        <variable
+                name="viewModel"
+                type="com.iti.bago.tabbarActivity.cart.CartFragmentViewModel"/>
+
+    </data>
+    <LinearLayout
+
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_margin="4dp"
+            android:background="@drawable/layout_bgw"
+    >
+
+        <android.support.constraint.ConstraintLayout
+
+                android:id="@+id/left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="@id/right"
+                android:layout_weight="5">
+
+
+            <ImageView
+                    android:id="@+id/product_img"
+                    android:layout_width="116dp"
+                    android:layout_height="100dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    android:scaleType="centerCrop"
+                    app:cart_image="@{cart_obj.img_src}"
+                    android:paddingRight="16dp"
+
+            />
+
+            <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/unit_price"
+                    app:layout_constraintLeft_toRightOf="@id/product_img"
+                    tools:text="NAME"
+                    android:textSize="20sp"
+                    android:textColor="@color/headerscolor"
+                   android:text="@{cart_obj.name}"
+            />
+            <!--app:cart_name="@{cart_obj.name}"-->
+            <TextView
+                    android:id="@+id/unit_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/name"
+                    app:layout_constraintBottom_toTopOf="@id/unit_weight"
+                    app:layout_constraintLeft_toRightOf="@id/product_img"
+                    tools:text="UNIT PRICE"
+                    android:text="@{`$`+ Double.toString(cart_obj.price_after)}"/>
+            <!--app:cart_unit_price ="@{`$`+ cart_obj.price_after}"-->
+            <TextView
+                    android:id="@+id/unit_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/unit_price"
+                    app:layout_constraintLeft_toRightOf="@id/product_img"
+                    app:layout_constraintBottom_toTopOf="@id/price_weight"
+                    tools:text="UNIT WEIGHT"
+                    android:text="@{cart_obj.type}"
+            />
+            <!--app:cart_unit_weight="@{cart_obj.type}"-->
+            <TextView
+                    android:id="@+id/price_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/product_img"
+                    android:text="@{Integer.toString(cart_obj.units_no) + `X $` +Double.toString(cart_obj.price_after) }"
+
+            />
+            <!--app:price_weight = "@{cart_obj.item_total_price}"-->
+            <ImageButton
+                    android:id="@+id/favourit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@id/total_price"
+                    app:layout_constraintRight_toRightOf="parent"
+
+                    android:background="@null" android:layout_marginBottom="20dp" android:layout_marginRight="16dp"
+                    android:onClick="@{(v)->viewModel.addtoFavourites(v,cart_obj )}"
+                    app:favourite_flag="@{cart_obj.favourite}"/>
+            <!--android:src="@mipmap/heart"-->
+            <TextView
+                    android:id="@+id/total_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="16dp"
+                    tools:text="$ TOTAL PRICE"
+                    android:text="@{`$`+Double.toString( cart_obj.item_total_price)}"
+            />
+
+        </android.support.constraint.ConstraintLayout>
+        <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/secondry"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:paddingVertical="8dp"
+                android:layout_marginHorizontal="4dp"/>
+
+        <android.support.constraint.ConstraintLayout
+                android:id="@+id/right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_weight="1"
+        >
+
+
+            <ImageButton
+
+                    android:id="@+id/plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/units_no"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:src="@mipmap/plus"
+                    android:background="@null"
+                    android:onClick="@{() -> viewModel.plus(cart_obj) }"/>
+
+            <TextView
+                    android:id="@+id/units_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/plus"
+                    app:layout_constraintBottom_toTopOf="@id/minus"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    tools:text="no"
+                   android:text="@{Integer.toString(cart_obj.units_no)}"
+            />
+            <!--app:units_no="@{cart_obj.units_no}"-->
+            <ImageButton
+
+                    android:id="@+id/minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/units_no"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@mipmap/minus"
+                    android:background="@null"
+                    android:onClick="@{() -> viewModel.minus(cart_obj) }"/>
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+</layout>

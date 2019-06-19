@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="signupFragment_VM"
+                  type="com.iti.bago.signup_login.SignUpFragment_ViewModel"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".signup_login.SignUpFragment"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/layout_bgw"
+            android:paddingEnd="20sp"
+            android:elevation="8dp"
+            android:layout_marginBottom="16dp"
+    >
+
+
+        <TextView
+
+                android:text="WELCOME"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:textColor="#707070"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/welcometxtview"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/name_txtview"
+                android:layout_marginBottom="16dp"
+                />
+        <TextView
+                android:text="USER NAME"
+                android:id="@+id/name_txtview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/welcometxtview"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/name"
+                android:textSize="20sp"
+                android:textColor="#707070"
+                android:layout_marginStart="10dp"
+        />
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:id="@+id/name"
+                android:hint="name"
+                app:layout_constraintTop_toBottomOf="@id/name_txtview"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/email_txtview"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"
+                android:textColor="#B7B7B7"
+                android:drawableRight="@mipmap/profile1"/>
+        <TextView
+                android:id="@+id/email_txtview"
+                android:text="EMAIL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/email_edittxt"
+                android:textSize="20sp"
+                android:textColor="#707070"
+                android:layout_marginStart="10dp"/>
+        <EditText
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="email"
+                android:id="@+id/email_edittxt"
+                app:layout_constraintTop_toBottomOf="@id/email_txtview"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/password_txtview"
+                android:textSize="20sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginVertical="2dp"
+                android:drawableRight="@mipmap/email"
+               />
+        <TextView
+                android:id="@+id/password_txtview"
+                android:hint="PASSWORD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/email_edittxt"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/firstpassowrd_edittxt"
+                android:textSize="20sp"
+                android:textColor="#707070"
+                android:layout_marginStart="10dp"/>
+        <EditText
+                android:id="@+id/firstpassowrd_edittxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="password"
+                app:layout_constraintTop_toBottomOf="@id/password_txtview"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/password_txtview2"
+                android:textSize="20sp"
+                android:textColor="#B7B7B7"
+                android:layout_marginStart="10dp"
+                android:layout_marginVertical="2dp"
+                android:drawableRight="@mipmap/password"/>
+        <TextView
+                android:id="@+id/password_txtview2"
+                android:text="RE-Enter password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/firstpassowrd_edittxt"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/secondpassword_edittxt"
+                android:textSize="20sp"
+                android:textColor="#707070"
+                android:layout_marginStart="10dp"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:id="@+id/secondpassword_edittxt"
+                app:layout_constraintTop_toBottomOf="@id/password_txtview2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/signupfrag_button"
+                android:textSize="20sp"
+                android:textColor="#B7B7B7"
+                android:hint="password"
+                android:layout_marginStart="10dp"
+                android:layout_marginVertical="2dp"
+                android:drawableRight="@mipmap/password"
+        />
+        <Button
+                android:text="SIGN UP"
+                android:layout_width="200dp"
+                android:layout_height="45dp"
+                android:id="@+id/signupfrag_button"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/secondpassword_edittxt"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/layout_bg"
+                android:layout_marginHorizontal="20dp"
+                android:onClick="@{(v)-> signupFragment_VM.movetoLogin(v)}"
+        />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

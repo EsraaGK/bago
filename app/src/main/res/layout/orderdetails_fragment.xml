@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+        <variable
+                name="orderDetails"
+                type="com.iti.bago.tabbarActivity.profile.orders.DetailsResponseObj"/>
+        <variable
+                name="viewModel"
+                type="com.iti.bago.tabbarActivity.profile.orders.OrderDetailsViewModel"/>
+    </data>
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:context=".tabbarActivity.profile.orders.OrderDetailsFragment">
+
+        <ImageView
+                android:scaleType="centerCrop"
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@mipmap/map"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+                android:id="@+id/order_lable"
+                style="@style/header_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:gravity="center"
+                android:text="Order Details"
+                android:textColor="#555"
+                app:layout_constraintBottom_toTopOf="@id/view1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/map"/>
+
+        <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#888"
+                app:layout_constraintBottom_toTopOf="@id/order_no_lable"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_lable"/>
+
+        <LinearLayout
+                android:id="@+id/call"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/view1"
+                app:layout_constraintBottom_toTopOf="@id/order_no_lable">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/phone"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+            tools:text="01020231020"/>
+        </LinearLayout>
+        <TextView
+                android:layout_marginLeft="8dp"
+                android:id="@+id/order_no_lable"
+                style="@style/header_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order Number"
+                android:textColor="#555"
+                app:layout_constraintBottom_toTopOf="@id/order_no_txt"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/call"/>
+
+        <TextView
+                android:layout_marginLeft="8dp"
+
+                android:id="@+id/order_no_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{orderDetails.order_id}"
+                app:layout_constraintBottom_toTopOf="@id/payment_lable"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_no_lable"/>
+
+        <TextView
+                android:id="@+id/payment_lable"
+                android:layout_marginLeft="8dp"
+
+                style="@style/header_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Payment"
+                android:textColor="#555"
+                app:layout_constraintBottom_toTopOf="@id/payment_txt"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_no_txt"/>
+
+        <TextView
+                android:layout_marginLeft="8dp"
+                android:id="@+id/payment_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{orderDetails.total_price}"
+                app:layout_constraintBottom_toTopOf="@id/dist_address_lable"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/payment_lable"/>
+
+        <TextView
+                android:id="@+id/dist_address_lable"
+                android:layout_marginLeft="8dp"
+                style="@style/header_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textColor="#555"
+                app:layout_constraintBottom_toTopOf="@id/dist_address_txt"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/payment_txt"/>
+
+        <TextView
+                android:layout_marginLeft="8dp"
+                android:id="@+id/dist_address_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{orderDetails.customer_address}"
+                app:layout_constraintBottom_toTopOf="@id/market_address_lable"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dist_address_lable"/>
+
+        <TextView
+                android:id="@+id/market_address_lable"
+                android:layout_marginLeft="8dp"
+                style="@style/header_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Market Address"
+                android:textColor="#555"
+                app:layout_constraintBottom_toTopOf="@id/market_address_txt"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dist_address_txt"/>
+
+        <TextView
+                android:layout_marginLeft="8dp"
+                android:id="@+id/market_address_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{orderDetails.supermarket_name}"
+                app:layout_constraintBottom_toTopOf="@id/products"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/market_address_lable"/>
+
+        <TextView
+                android:id="@+id/products"
+                android:layout_marginLeft="8dp"
+                style="@style/header_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Products"
+                android:textColor="#555"
+                app:layout_constraintBottom_toTopOf="@id/productOrderListview"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/market_address_txt"/>
+
+        <android.support.v7.widget.RecyclerView
+                android:layout_margin="8dp"
+                android:id="@+id/productOrderListview"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/products"
+                app:listData="@{orderDetails.products}"/>
+    </android.support.constraint.ConstraintLayout>
+</layout>
+

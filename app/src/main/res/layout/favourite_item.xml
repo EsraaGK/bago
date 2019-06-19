@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+                name="favourites_obj"
+                type="com.iti.bago.tabbarActivity.profile.favourites.FavouritesObj"/>
+
+        <variable
+                name="viewModel"
+                  type="com.iti.bago.tabbarActivity.profile.favourites.FavouritesViewModel"/>
+    </data>
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_bgw"
+            android:elevation="8dp"
+            android:layout_marginBottom="4dp"
+    >
+        <ImageView
+                android:id="@+id/product_image"
+                android:layout_width="150dp"
+                android:layout_height="90dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:src="@drawable/q"
+                android:layout_marginHorizontal="10dp"
+                app:product_image="@{favourites_obj.imgSrcUrl}"
+        />
+        <TextView
+
+                android:id="@+id/product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/product_image"
+                app:layout_constraintTop_toTopOf="@id/product_image"
+                tools:text="product_name"
+                android:textSize="20sp"
+               android:textStyle="bold"
+                android:textColor="#707070"
+                app:product_name="@{favourites_obj.name}"
+
+        />
+        <TextView
+                android:id="@+id/product_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/product_image"
+                app:layout_constraintTop_toBottomOf="@id/product_name"
+                app:layout_constraintBottom_toTopOf="@id/product_weight"
+                tools:text="product_price"
+                app:unit_price="@{favourites_obj.price_after}"
+        />
+        <TextView
+                android:id="@+id/product_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/product_image"
+                app:layout_constraintTop_toBottomOf="@id/product_price"
+                app:layout_constraintBottom_toTopOf="@id/addto_card"
+                tools:text="product_weight"
+                app:unit_weight="@{favourites_obj.type}"
+        />
+        <Button
+                android:id="@+id/addto_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="ADD TO CART"
+                android:textColor="#EA4C89"
+                android:background="@drawable/boarder_line"
+                android:padding="4dp"
+                android:onClick="@{(v)->viewModel.addtoCard(v,favourites_obj)}"
+
+        />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

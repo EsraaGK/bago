@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+                name="product_obj"
+                type="com.iti.bago.tabbarActivity.home.product.ProductObj"/>
+        <variable name="viewModel"
+                  type="com.iti.bago.tabbarActivity.home.product.ProductsFragmentViewModel"/>
+    </data>
+    <android.support.constraint.ConstraintLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_bgw"
+            android:layout_margin="8dp"
+            >
+
+
+        <ImageView
+                android:scaleType="center"
+                android:layout_width="195dp"
+                android:layout_height="194dp"
+                android:id="@+id/product_image"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/product_name"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:srcCompat="@drawable/q"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                app:product_image="@{product_obj.imgSrcUrl}"
+        />
+
+
+        <ImageButton
+                android:id="@+id/favourit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@mipmap/heart"
+                android:background="@null"
+                android:onClick="@{(v)->viewModel.addtoFavourites(v,product_obj )}"/>
+
+
+        <TextView android:id="@+id/product_name"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  app:layout_constraintTop_toBottomOf="@id/product_image"
+                  app:layout_constraintBottom_toTopOf="@id/unit_price"
+                  app:layout_constraintRight_toRightOf="parent"
+                  app:layout_constraintLeft_toLeftOf="parent"
+                  android:text="name"
+                  android:textColor="@color/ob_header"
+                  android:layout_marginTop="5dp"
+                  app:product_name="@{product_obj.name}"
+        />
+
+        <TextView
+                android:id="@+id/unit_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/product_name"
+                app:layout_constraintBottom_toTopOf="@id/unit_weight"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="UNIT PRICE"
+                android:textColor="@color/ob_header"
+
+                app:product_unit_price="@{product_obj.price_after}"
+        />
+
+
+        <TextView
+                android:id="@+id/unit_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/unit_price"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/unit_price"
+                android:text="UNIT WEIGHT"
+                app:product_unit_weight="@{product_obj.type}"
+                android:textColor="@color/ob_header"
+        />
+
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@mipmap/shoppingcartp"
+                android:background="@color/white"
+
+                android:onClick="@{(v)->viewModel.addtoCard(v,product_obj )}"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
+

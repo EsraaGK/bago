@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="viewModel"
+                  type="com.iti.bago.tabbarActivity.cart.ConfirmorderViewModel"/>
+    </data>
+    <android.support.constraint.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            tools:context=".tabbarActivity.cart.ConfirmOrderFragment"
+            android:layout_margin="8dp">
+
+        <TextView
+                android:id="@+id/address_lable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ADDRESS LINE"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/address_txt"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+
+                style="@style/header_style"/>
+        <EditText
+                android:id="@+id/address_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/address_lable"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/phone_lable"
+        />
+
+        <TextView
+                android:id="@+id/phone_lable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/address_txt"
+                android:text="PHONE NUMBER"
+                style="@style/header_style"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+        <EditText
+                android:id="@+id/phone_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phone_lable"
+                app:layout_constraintBottom_toTopOf="@id/payment_label" android:inputType="phone"/>
+        <TextView
+                android:id="@+id/payment_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phone_txt"
+                app:layout_constraintBottom_toTopOf="@id/cash_label"
+                android:text="PAYMENT METHOD"
+                style="@style/header_style"/>
+
+        <TextView android:id="@+id/cash_label"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  app:layout_constraintTop_toBottomOf="@id/payment_label"
+                  app:layout_constraintLeft_toRightOf="parent"
+                  app:layout_constraintBottom_toTopOf="@id/view1"
+                  android:text="Bago now supports only CASH payment"/>
+        <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/secondry"
+                app:layout_constraintTop_toBottomOf="@id/cash_label"
+                app:layout_constraintBottom_toTopOf="@id/delivery_label"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:paddingVertical="8dp"
+                android:layout_marginHorizontal="4dp"/>
+
+        <TextView
+                android:id="@+id/delivery_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delivery Date and Time "
+                app:layout_constraintTop_toBottomOf="@id/view1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/view2"
+                app:layout_constraintRight_toLeftOf="@id/date_txt"
+        />
+        <TextView android:id="@+id/date_txt"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  app:layout_constraintTop_toBottomOf="@id/view1"
+                  app:layout_constraintLeft_toRightOf="@id/delivery_label"
+                  app:layout_constraintRight_toRightOf="parent"
+                  app:layout_constraintBottom_toBottomOf="@id/view2"
+                  android:layout_marginLeft="16dp"
+                  android:text="@{viewModel.current_date.toString()}"/>
+
+        <!--<TextView android:id="@+id/time_txt"-->
+                  <!--android:layout_width="0dp"-->
+                  <!--android:layout_height="23dp"-->
+                  <!--app:layout_constraintTop_toBottomOf="@id/view1"-->
+                  <!--app:layout_constraintLeft_toRightOf="@id/date_txt"-->
+                  <!--app:layout_constraintRight_toRightOf="parent"-->
+                  <!--app:layout_constraintBottom_toBottomOf="@id/view2"-->
+                  <!--android:text="@{viewModel.current_time.toString()}"-->
+        <!--/>-->
+        <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/secondry"
+                app:layout_constraintTop_toBottomOf="@id/date_txt"
+                app:layout_constraintBottom_toTopOf="@id/notes_label"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:paddingVertical="8dp"
+                android:layout_marginHorizontal="4dp"/>
+        <TextView
+                android:id="@+id/notes_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/view2"
+                app:layout_constraintBottom_toTopOf="@id/notes"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Notes"
+                style="@style/header_style"/>
+        <TextView
+                android:id="@+id/notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/notes_label"
+                app:layout_constraintBottom_toTopOf="@id/confirm_btn"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Bago adds 15LE on each order"/>
+
+        <Button
+                android:id="@+id/confirm_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Confirm"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:background="@drawable/layout_bg"
+                android:textStyle="bold"
+                android:onClick="@{(v)->viewModel.showDialog(v)}"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

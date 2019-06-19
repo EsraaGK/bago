@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/navigation"
+            app:startDestination="@id/signUpFragment">
+    <fragment android:id="@+id/signUpFragment" android:name="com.iti.bago.signup_login.SignUpFragment"
+              android:label="SignUpFragment">
+        <action android:id="@+id/action_signUpFragment_to_logInFragment" app:destination="@id/logInFragment"
+        />
+        <action android:id="@+id/action_signUpFragment_to_tabbarActivity" app:destination="@id/tabbarActivity"/>
+        <action android:id="@+id/action_signUpFragment_to_onBoardingActivity" app:destination="@id/onBoardingActivity"/>
+    </fragment>
+    <fragment android:id="@+id/logInFragment" android:name="com.iti.bago.signup_login.LogInFragment" android:label="LogInFragment">
+        <action android:id="@+id/action_logInFragment_to_signUpFragment" app:destination="@id/signUpFragment"
+        />
+        <action android:id="@+id/action_logInFragment_to_tabbarActivity" app:destination="@id/tabbarActivity"
+        />
+        <action android:id="@+id/action_logInFragment_to_onboardingFragment" app:destination="@id/onboardingFragment"/>
+        <action android:id="@+id/action_logInFragment_to_onBoardingActivity2" app:destination="@id/onBoardingActivity"/>
+    </fragment>
+    <activity android:id="@+id/tabbarActivity" android:name="com.iti.bago.tabbarActivity.TabbarActivity"
+              android:label="TabbarActivity"/>
+    <fragment android:id="@+id/onboardingFragment" android:name="com.iti.bago.signup_login.onboarding.OnboardingFragment"
+              android:label="onboarding_fragment" tools:layout="@layout/onboarding_fragment">
+        <action android:id="@+id/action_onboardingFragment_to_tabbarActivity" app:destination="@id/tabbarActivity"/>
+    </fragment>
+    <activity android:id="@+id/onBoardingActivity"
+              android:name="com.iti.bago.signup_login.onboarding.OnBoardingActivityView"
+              android:label="activity_on_boarding" tools:layout="@layout/activity_on_boarding_view"/>
+</navigation>

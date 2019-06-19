@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/tabbar"
+            app:startDestination="@id/homeFragment">
+
+    <fragment android:id="@+id/homeFragment" android:name="com.iti.bago.tabbarActivity.home.store.HomeFragment"
+              android:label="HomeFragment">
+        <action android:id="@+id/action_homeFragment_to_storeSections" app:destination="@id/storeSections"/>
+
+    </fragment>
+    <fragment android:id="@+id/cartFragment" android:name="com.iti.bago.tabbarActivity.cart.CartFragment"
+              android:label="CartFragment">
+        <action android:id="@+id/action_cartFragment_to_confirmOrderFragment"
+                app:destination="@id/confirmOrderFragment"/>
+    </fragment>
+    <fragment android:id="@+id/settingsFragment" android:name="com.iti.bago.tabbarActivity.settings.SettingsFragment"
+              android:label="SettingsFragment">
+        <action android:id="@+id/action_settingsFragment_to_webViewFragment" app:destination="@id/webViewFragment"/>
+        <action android:id="@+id/action_settingsFragment_to_FAQSA" app:destination="@id/FAQSA"/>
+        <action android:id="@+id/action_settingsFragment_to_contactFragment" app:destination="@id/contactFragment"/>
+        <action android:id="@+id/action_settingsFragment_to_privacyPolicyFragment"
+                app:destination="@id/privacyPolicyFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/profileFragment" android:name="com.iti.bago.tabbarActivity.profile.ProfileFragment"
+            android:label="ProfileFragment">
+        <action
+                android:id="@+id/action_profileFragment_to_favourits" app:destination="@id/favourits"/>
+        <action
+                android:id="@+id/action_profileFragment_to_ordersFragment" app:destination="@id/ordersFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/storeSections"
+            android:name="com.iti.bago.tabbarActivity.home.storesections.StoreSectionsFragment"
+            android:label="storesections_fragment" tools:layout="@layout/storesections_fragment">
+        <action
+                android:id="@+id/action_storeSections_to_productsFragment" app:destination="@id/productsFragment"
+        />
+        <argument android:name="id" app:argType="string"/>
+    </fragment>
+    <fragment
+            android:id="@+id/productsFragment"
+            android:name="com.iti.bago.tabbarActivity.home.product.ProductsFragment"
+            android:label="ProductsFragment">
+        <argument
+                android:name="store_id"
+                app:argType="string"/>
+        <argument
+                android:name="section_id"
+                app:argType="string"/>
+    </fragment>
+    <fragment android:id="@+id/confirmOrderFragment"
+              android:name="com.iti.bago.tabbarActivity.cart.ConfirmOrderFragment"
+              android:label="confirm_order_fragment" tools:layout="@layout/confirm_order_fragment">
+        <argument android:name="total_price" app:argType="float"/>
+        <argument android:name="order_list" app:argType="com.iti.bago.tabbarActivity.cart.CartObj[]"/>
+        <action android:id="@+id/action_confirmOrderFragment_to_homeFragment" app:destination="@id/homeFragment"/>
+    </fragment>
+    <fragment android:id="@+id/favourits"
+              android:name="com.iti.bago.tabbarActivity.profile.favourites.FavouritesFragment"
+              android:label="favourits_fragment" tools:layout="@layout/favourits_fragment"/>
+    <fragment android:id="@+id/ordersFragment" android:name="com.iti.bago.tabbarActivity.profile.orders.OrdersFragment"
+              android:label="OrdersFragment">
+        <action android:id="@+id/action_ordersFragment_to_orderDetailsFragment"
+                app:destination="@id/orderDetailsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/webViewFragment" android:name="com.iti.bago.tabbarActivity.settings.WebViewFragment"
+              android:label="web_view_fragment" tools:layout="@layout/web_view_fragment"/>
+    <fragment android:id="@+id/FAQSA" android:name="com.iti.bago.tabbarActivity.settings.FAQSA"
+              android:label="fragment_faqs" tools:layout="@layout/fragment_faqs"/>
+    <fragment android:id="@+id/contactFragment" android:name="com.iti.bago.tabbarActivity.settings.ContactFragment"
+              android:label="fragment_contact" tools:layout="@layout/fragment_contact"/>
+    <fragment android:id="@+id/privacyPolicyFragment"
+              android:name="com.iti.bago.tabbarActivity.settings.PrivacyPolicyFragment"
+              android:label="fragment_privacypolicy" tools:layout="@layout/fragment_privacypolicy"/>
+    <fragment android:id="@+id/orderDetailsFragment"
+              android:name="com.iti.bago.tabbarActivity.profile.orders.OrderDetailsFragment"
+              android:label="orderdetails_fragment" tools:layout="@layout/orderdetails_fragment">
+        <argument android:name="order_id" app:argType="string"/>
+    </fragment>
+</navigation>
