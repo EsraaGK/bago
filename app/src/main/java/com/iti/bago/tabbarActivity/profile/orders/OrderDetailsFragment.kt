@@ -2,7 +2,9 @@ package com.iti.bago.tabbarActivity.profile.orders
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingUtil
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -15,6 +17,7 @@ import com.iti.bago.R
 import com.iti.bago.SharedPrefUtil
 import com.iti.bago.databinding.OrderdetailsFragmentBinding
 import com.iti.bago.tabbarActivity.TabbarActivity
+import kotlinx.android.synthetic.main.orderdetails_fragment.view.*
 
 class OrderDetailsFragment : Fragment() {
 
@@ -31,6 +34,8 @@ class OrderDetailsFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(OrderDetailsViewModel::class.java)
         val args = OrderDetailsFragmentArgs.fromBundle(arguments!!)
         viewModel.args = args
+
+
 
         val sharedPrefUtil = SharedPrefUtil()
         val id = sharedPrefUtil.getId(this.context!!)

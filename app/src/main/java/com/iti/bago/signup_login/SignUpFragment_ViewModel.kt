@@ -33,6 +33,7 @@ class SignUpFragment_ViewModel(val navController: NavController) : ViewModel() {
     }
 
     fun movetoLogin(v: View) {
+        this.v=v
         var flag = true
         userSignupRequest.password =
             v.rootView.findViewById<EditText>(R.id.firstpassowrd_edittxt).editableText.toString()

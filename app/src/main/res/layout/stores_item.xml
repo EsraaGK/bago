@@ -12,6 +12,8 @@
             android:padding="8dp"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:elevation="8dp"
+            android:background="@drawable/layout_bgw"
             android:onClick="@{()->viewModel.movetoSection(store_obj)}"
 
     >

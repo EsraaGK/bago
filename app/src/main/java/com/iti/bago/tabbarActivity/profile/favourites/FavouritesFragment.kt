@@ -46,6 +46,7 @@ class FavouritesFragment : Fragment(){
 
         favouritesFragmentViewModel.position.observe(this, Observer {
             (binding.favouritesRecyclerview.adapter)?.notifyItemChanged(it!!)
+
         })
 
         return binding.root

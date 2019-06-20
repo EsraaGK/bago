@@ -50,6 +50,7 @@ class CartFragmentViewModel : ViewModel() {
     var total_price: Float = 0.0F
     var total_coast = MutableLiveData<Float>()
     var flag = MutableLiveData<Boolean>()
+
     init {
 
         _cartList.value = mutableListOf<CartObj>()
@@ -220,12 +221,12 @@ class CartFragmentViewModel : ViewModel() {
                 // this will run on a thread managed by Retrofit
                 val PostResponseObj = cartPostResponseObj.await()
                 if (PostResponseObj.equals(null)) {
-                    flag.value =true
-                  item.favourite =flag.value!!
-                    position.value = +1
 
                     Toast.makeText(v.context, "Item is already in Favourites !", Toast.LENGTH_SHORT).show()
                 }
+
+                item.favourite = true
+                position.value = position.value
                 Toast.makeText(v.context, "Product is SUCCESSFULLY added to Favourites !", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 Log.i("error", "${e.message}")

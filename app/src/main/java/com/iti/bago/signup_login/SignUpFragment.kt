@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.iti.bago.R
+import com.iti.bago.SharedPrefUtil
 import com.iti.bago.databinding.FragmentSignUpBinding
 
 
@@ -39,7 +40,10 @@ lateinit var signUpFragment_ViewModel_Factory : SignUpFragment_ViewModel_Factory
         binding.signupFragmentVM = signUpFragment_ViewModel
 
 
-
+        var sharedPrefUtilil = SharedPrefUtil()
+        if(!(sharedPrefUtilil.getId(activity!!)== null||sharedPrefUtilil.getId(activity!!)== "")){
+            navController.navigate(R.id.action_signUpFragment_to_tabbarActivity)
+        }
 
         return binding.root
     }

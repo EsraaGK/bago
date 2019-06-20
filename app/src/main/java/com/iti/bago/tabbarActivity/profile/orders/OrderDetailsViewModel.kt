@@ -3,7 +3,11 @@ package com.iti.bago.tabbarActivity.profile.orders
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel;
+import android.content.Intent
+import android.net.Uri
+import android.support.v4.content.ContextCompat.startActivity
 import android.util.Log
+import android.view.View
 import com.iti.bago.tabbarActivity.ConfirmRetrofitObj
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -73,6 +77,11 @@ class OrderDetailsViewModel : ViewModel() {
         }
 
 
+    }
+
+    fun callDriver(v: View ,item :DetailsResponseObj){
+        var number = item.delivery_phone
+        v.context.startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number")))
     }
 
     override fun onCleared() {

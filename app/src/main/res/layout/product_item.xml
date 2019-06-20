@@ -11,8 +11,8 @@
     </data>
     <android.support.constraint.ConstraintLayout
 
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
             android:background="@drawable/layout_bgw"
             android:elevation="8dp"
@@ -22,8 +22,8 @@
 
         <ImageView
                 android:scaleType="center"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="195dp"
+                android:layout_height="195dp"
                 android:id="@+id/product_image"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/product_name"
@@ -42,10 +42,10 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@mipmap/heart"
+                app:srcCompat="@drawable/pink_heart"
                 android:background="@null"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
                 android:onClick="@{(v)->viewModel.addtoFavourites(v,product_obj )}"/>
 
 
@@ -95,9 +95,9 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:src="@mipmap/shoppingcartp"
-                android:layout_marginRight="4dp"
-                android:layout_marginBottom="4dp"
+                android:src="@mipmap/shoppingcart"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
                 android:background="@null"
 
                 android:onClick="@{(v)->viewModel.addtoCard(v,product_obj )}"/>

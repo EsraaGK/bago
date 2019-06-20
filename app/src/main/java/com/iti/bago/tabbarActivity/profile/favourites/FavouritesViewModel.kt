@@ -140,6 +140,8 @@ class FavouritesViewModel() : ViewModel() {
                 // this will run on a thread managed by Retrofit
                 val cartPostResponseObj = posttoCart.await()
                 Log.i("bb", cartPostResponseObj.units_no.toString())
+                item.cart = true
+                position.value = position.value
                 Toast.makeText(v.context, "Product is SUCCESSFULLY added to cart !", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 Log.i("error", "${e.message}")
