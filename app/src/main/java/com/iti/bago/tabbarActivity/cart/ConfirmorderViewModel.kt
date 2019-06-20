@@ -3,6 +3,7 @@ package com.iti.bago.tabbarActivity.cart
 
 import android.app.AlertDialog
 import android.arch.lifecycle.ViewModel;
+import android.text.TextUtils.substring
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -45,8 +46,8 @@ class ConfirmorderViewModel(val tempArray: Array<CartObj>) : ViewModel() {
     var mySupermarketsId = messyList.distinctBy { it.supermarket_id }
     val supermarkets_no = mySupermarketsId.size
 
-var args :ConfirmOrderFragmentArgs?= null
-   // val total_orders_coast = (args!!.totalPrice) *15
+    var args: ConfirmOrderFragmentArgs? = null
+    // val total_orders_coast = (args!!.totalPrice) *15
     fun setId_Token(id: String, token: String) {
         customer_id = id
         customer_token = token
@@ -63,20 +64,25 @@ var args :ConfirmOrderFragmentArgs?= null
     fun ConfirmPostOrder(v: View) {
         var flag = false
         adress = v.rootView.findViewById<EditText>(R.id.address_txt).editableText.toString()
-        phone = v.rootView.findViewById<EditText>(R.id.phone_txt).editableText.toString().substring(1)
+       var tmp = v.rootView.findViewById<EditText>(R.id.phone_txt).editableText.toString()
 
-        val number = validNumber(phone, "+20")
 
-        if ((adress.isEmpty() || adress.isBlank()) && number == null) {
+        //  val number = validNumber(phone, "+20")
+
+        if ((adress.isEmpty() || adress.isBlank())||(tmp.isEmpty() || tmp.isBlank()) ) {
+
             if ((adress.isEmpty() || adress.isBlank())) {
-                v.rootView.findViewById<EditText>(R.id.phone_txt).error = "Invalid Data"
+                v.rootView.findViewById<EditText>(R.id.address_txt).error = "Invalid Data"
             }
+            if (!(tmp.isEmpty() || tmp.isBlank())) {
+                phone =tmp.substring(1)
+                val number = validNumber(phone, "+20")
 
-            if (number == null) {
-                v.rootView.findViewById<EditText>(R.id.phone_txt).error = "Invalid Data"
+                if (number == null) {
+                    v.rootView.findViewById<EditText>(R.id.phone_txt).error = "Invalid Data"
+                }
+                //error
             }
-            //error
-
         } else {
             //data is full ...Disable button
             v.rootView.findViewById<Button>(R.id.confirm_btn).isEnabled = false
@@ -119,119 +125,119 @@ var args :ConfirmOrderFragmentArgs?= null
         }
 
 
-}
-
-fun calcTotalPrice(list: List<CartObj>): Float {
-    var total_price = 0.0F
-
-    if (list.size != 0) {
-        for (n in list) {
-
-            total_price += n.item_total_price.toFloat()
-            Log.i("Product : ", "${n.name} \n")
-        }
-    } else {
-        total_price = 0.0F
     }
-    return total_price
-}
 
-fun posttoServer(orderPostObj: OrderPostObj, v: View) {
-    coroutineScope.launch {
-        val cartPostResponseObj = ConfirmRetrofitObj.retrofitSercice.postConfirmOrder(
-            orderPostObj
-            //, customer_token
-        )
+    fun calcTotalPrice(list: List<CartObj>): Float {
+        var total_price = 0.0F
+
+        if (list.size != 0) {
+            for (n in list) {
+
+                total_price += n.item_total_price.toFloat()
+                Log.i("Product : ", "${n.name} \n")
+            }
+        } else {
+            total_price = 0.0F
+        }
+        return total_price
+    }
+
+    fun posttoServer(orderPostObj: OrderPostObj, v: View) {
+        coroutineScope.launch {
+            val cartPostResponseObj = ConfirmRetrofitObj.retrofitSercice.postConfirmOrder(
+                orderPostObj
+                //, customer_token
+            )
+            try {
+                // this will run on a thread managed by Retrofit
+                val PostResponseObj = cartPostResponseObj.await()
+                Toast.makeText(v.context, "order is succedded", Toast.LENGTH_SHORT).show()
+                v.findNavController().navigate(R.id.action_confirmOrderFragment_to_homeFragment)
+                Log.i("order is succedded", "Product is SUCCESSFULLY added to Favourites !")
+            } catch (e: Exception) {
+                Log.i("error", "${e.message}")
+                v.rootView.findViewById<Button>(R.id.confirm_btn).isEnabled = true
+                Toast.makeText(v.context, "Order is failed, Try Again", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+    }
+
+    fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
+        val formatter = SimpleDateFormat(format, locale)
+        return formatter.format(this)
+    }
+
+    fun getCurrentDateTime(): Date {
+        return Calendar.getInstance().time
+    }
+
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
+
+    fun showDialog(view: View) {
+        //Inflate the dialog with custom view
+        val mDialogView = LayoutInflater.from(view.context).inflate(R.layout.confirm_dialog, null)
+        //AlertDialogBuilder
+        val mBuilder = AlertDialog.Builder(view.context)
+            .setView(mDialogView)
+            .setTitle("Confirm Order")
+        //show dialog
+        val mAlertDialog = mBuilder.show()
+
+        //set text from EditTexts of custom layout
+        mDialogView.supermarket_text.text = "You Will Order From $supermarkets_no " +
+                "Supermarkets with total price of {${args!!.totalPrice + (supermarkets_no * 15)}} ,Order?"
+
+        //ok button click of custom layout
+        mDialogView.dialogOkBtn.setOnClickListener {
+            //set the input text in TextView
+
+            //dismiss dialog
+            ConfirmPostOrder(view)
+            mAlertDialog.dismiss()
+
+        }
+        //cancel button click of custom layout
+        mDialogView.dialogCancelBtn.setOnClickListener {
+            //dismiss dialog
+            mAlertDialog.dismiss()
+        }
+    }
+
+
+    fun validNumber(input: String, countryCode: String): String? {
+        val phoneNumberUtil = PhoneNumberUtil.getInstance()
+        val isoCode = phoneNumberUtil.getRegionCodeForCountryCode(Integer.parseInt(countryCode))
+        var phoneNumber: Phonenumber.PhoneNumber? = null
+        var finalNumber: String? = null
+        var isValid = false
+        var isMobile: PhoneNumberUtil.PhoneNumberType? = null
         try {
-            // this will run on a thread managed by Retrofit
-            val PostResponseObj = cartPostResponseObj.await()
-            Toast.makeText(v.context, "order is succedded", Toast.LENGTH_SHORT).show()
-            v.findNavController().navigate(R.id.action_confirmOrderFragment_to_homeFragment)
-            Log.i("order is succedded", "Product is SUCCESSFULLY added to Favourites !")
-        } catch (e: Exception) {
-            Log.i("error", "${e.message}")
+            phoneNumber = phoneNumberUtil.parse(input, isoCode)
+            isValid = phoneNumberUtil.isValidNumber(phoneNumber)
+            isMobile = phoneNumberUtil.getNumberType(phoneNumber)
 
-
+        } catch (e: NumberParseException) {
+            e.printStackTrace()
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
         }
 
+
+
+        if (isValid && (PhoneNumberUtil.PhoneNumberType.MOBILE == isMobile || PhoneNumberUtil.PhoneNumberType.FIXED_LINE_OR_MOBILE == isMobile)) {
+            finalNumber = phoneNumberUtil.format(
+                phoneNumber,
+                PhoneNumberUtil.PhoneNumberFormat.E164
+            ).substring(1)
+        }
+
+        return finalNumber
     }
-}
-
-fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
-    val formatter = SimpleDateFormat(format, locale)
-    return formatter.format(this)
-}
-
-fun getCurrentDateTime(): Date {
-    return Calendar.getInstance().time
-}
-
-
-override fun onCleared() {
-    super.onCleared()
-    viewModelJob.cancel()
-}
-
-fun showDialog(view: View) {
-    //Inflate the dialog with custom view
-    val mDialogView = LayoutInflater.from(view.context).inflate(R.layout.confirm_dialog, null)
-    //AlertDialogBuilder
-    val mBuilder = AlertDialog.Builder(view.context)
-        .setView(mDialogView)
-        .setTitle("Confirm Order")
-    //show dialog
-    val mAlertDialog = mBuilder.show()
-
-    //set text from EditTexts of custom layout
-    mDialogView.supermarket_text.text = "You Will Order From $supermarkets_no " +
-            "Supermarkets with total price of {${args!!.totalPrice +(supermarkets_no* 15)}} ,Order?"
-
-    //ok button click of custom layout
-    mDialogView.dialogOkBtn.setOnClickListener {
-        //set the input text in TextView
-
-        //dismiss dialog
-        ConfirmPostOrder(view)
-        mAlertDialog.dismiss()
-
-    }
-    //cancel button click of custom layout
-    mDialogView.dialogCancelBtn.setOnClickListener {
-        //dismiss dialog
-        mAlertDialog.dismiss()
-    }
-}
-
-
-fun validNumber(input: String, countryCode: String): String? {
-    val phoneNumberUtil = PhoneNumberUtil.getInstance()
-    val isoCode = phoneNumberUtil.getRegionCodeForCountryCode(Integer.parseInt(countryCode))
-    var phoneNumber: Phonenumber.PhoneNumber? = null
-    var finalNumber: String? = null
-    var isValid = false
-    var isMobile: PhoneNumberUtil.PhoneNumberType? = null
-    try {
-        phoneNumber = phoneNumberUtil.parse(input, isoCode)
-        isValid = phoneNumberUtil.isValidNumber(phoneNumber)
-        isMobile = phoneNumberUtil.getNumberType(phoneNumber)
-
-    } catch (e: NumberParseException) {
-        e.printStackTrace()
-    } catch (e: NullPointerException) {
-        e.printStackTrace()
-    }
-
-
-
-    if (isValid && (PhoneNumberUtil.PhoneNumberType.MOBILE == isMobile || PhoneNumberUtil.PhoneNumberType.FIXED_LINE_OR_MOBILE == isMobile)) {
-        finalNumber = phoneNumberUtil.format(
-            phoneNumber,
-            PhoneNumberUtil.PhoneNumberFormat.E164
-        ).substring(1)
-    }
-
-    return finalNumber
-}
 
 
 }

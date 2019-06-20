@@ -43,7 +43,7 @@
                 android:textStyle="bold"
                 android:textColor="#707070"
                 app:product_name="@{favourites_obj.name}"
-
+android:layout_marginBottom="4dp"
         />
         <TextView
                 android:id="@+id/product_price"
@@ -54,6 +54,7 @@
                 app:layout_constraintBottom_toTopOf="@id/product_weight"
                 tools:text="product_price"
                 app:unit_price="@{favourites_obj.price_after}"
+                android:layout_marginBottom="4dp"
         />
         <TextView
                 android:id="@+id/product_weight"
@@ -64,6 +65,7 @@
                 app:layout_constraintBottom_toTopOf="@id/addto_card"
                 tools:text="product_weight"
                 app:unit_weight="@{favourites_obj.type}"
+                android:layout_marginBottom="4dp"
         />
         <ImageButton
                 android:id="@+id/addto_card"

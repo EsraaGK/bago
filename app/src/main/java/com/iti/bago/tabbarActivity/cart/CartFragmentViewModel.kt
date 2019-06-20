@@ -222,7 +222,7 @@ class CartFragmentViewModel : ViewModel() {
                 if (PostResponseObj.equals(null)) {
                     flag.value =true
                   item.favourite =flag.value!!
-                    position.value = -1
+                    position.value = +1
 
                     Toast.makeText(v.context, "Item is already in Favourites !", Toast.LENGTH_SHORT).show()
                 }
